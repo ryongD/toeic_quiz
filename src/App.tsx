@@ -1,4 +1,4 @@
-import ToeicDay1Quiz from './pages/ToeicDay2Quiz'
+import ToeicDay2Quiz from './pages/ToeicDay2Quiz'
 
 function App() {
   return <ToeicDay2Quiz />
