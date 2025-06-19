@@ -118,7 +118,7 @@ function ToeicQuiz() {
     <div className="max-w-3xl mx-auto p-6 space-y-12">
       <div className="text-center mb-6">
         <img
-           src="/public/daryong.png"
+           src="daryong.png"
            alt="귀여운 이미지"
            className="block mx-auto w-20 h-auto"
         />
