@@ -1,7 +1,7 @@
-import ToeicDay1Quiz from './pages/ToeicDay1Quiz'
+import ToeicDay1Quiz from './pages/ToeicDay2Quiz'
 
 function App() {
-  return <ToeicDay1Quiz />
+  return <ToeicDay2Quiz />
 }
 
 export default App
