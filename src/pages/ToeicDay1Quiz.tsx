@@ -60,12 +60,12 @@ const allIdioms = [
   { translation: "제출하다", choices: ["turn in", "apply for", "look forward to", "in charge of"], answer: "turn in" },
 ];
 
-function getRandomItems(arr, count) {
+function getRandomItems<T>(arr: T[], count: number): T[] {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 }
 
-function shuffleChoicesInAllWords(words) {
+function shuffleChoicesInAllWords<T extends { choices?: string[] }>(words: T[]): T[] {
   return words.map(word => {
     if (!word.choices) return word;
     const shuffledChoices = [...word.choices].sort(() => 0.5 - Math.random());
@@ -74,10 +74,10 @@ function shuffleChoicesInAllWords(words) {
 }
 
 function ToeicDay1Quiz() {
-  const [multipleChoice, setMultipleChoice] = useState([]);
-  const [fillInBlank, setFillInBlank] = useState([]);
-  const [idioms, setIdioms] = useState([]);
-  const [answers, setAnswers] = useState({});
+  const [multipleChoice, setMultipleChoice] = useState<typeof allWords>([]);
+  const [fillInBlank, setFillInBlank] = useState<typeof allWords>([]);
+  const [idioms, setIdioms] = useState<typeof allIdioms>([]);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [showAll, setShowAll] = useState(false);
 
@@ -93,7 +93,7 @@ function ToeicDay1Quiz() {
     setIdioms(idiomQs);
   }, []);
 
-  const handleChange = (key, value) => {
+  const handleChange = (key: string, value: string) => {
     setAnswers(prev => ({ ...prev, [key]: value }));
   };
 
