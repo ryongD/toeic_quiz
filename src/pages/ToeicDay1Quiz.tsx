@@ -112,7 +112,7 @@ function ToeicDay1Quiz() {
     if (answers[`i${i}`] === q.answer) score++;
   });
 
-  const getMark = (correct) => correct ? "⭕" : "❌";
+  const getMark = (correct: boolean) => (correct ? "⭕" : "❌");
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-12">
@@ -128,7 +128,7 @@ function ToeicDay1Quiz() {
                 {i + 1}. {q.question} {submitted && <span className={correct ? "text-green-500" : "text-red-500"}>{getMark(correct)}</span>}
               </p>
               <div className="space-y-2">
-                {q.choices.map((choice, j) => (
+                {q.choices && q.choices.map((choice, j) => (
                   <label key={j} className="block">
                     <input
                       type="radio"
