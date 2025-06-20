@@ -2,15 +2,23 @@ import { useEffect, useState } from "react";
 import { shuffle } from "../utils/shuffle";
 import { words, idioms, getMarkAfterQuestion } from "../data/day3Data";
 
-function shuffleAndPick(array, count) {
+function shuffleAndPick<T>(array: T[], count: number): T[] {
   return shuffle([...array]).slice(0, count);
 }
 
 export default function ToeicDay3Quiz() {
-  const [answers, setAnswers] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-  const [score, setScore] = useState(0);
-  const [showAll, setShowAll] = useState(false);
+  type QuizItem = {
+  question: string;
+  answer: string;
+  options: string[];
+  key: string;
+};
+
+const [answers, setAnswers] = useState<{ [key: string]: string }>({});
+const [definitionQuiz, setDefinitionQuiz] = useState<QuizItem[]>([]);
+const [fillQuiz, setFillQuiz] = useState<QuizItem[]>([]);
+const [underlineQuiz, setUnderlineQuiz] = useState<QuizItem[]>([]);
+const [idiomQuiz, setIdiomQuiz] = useState<QuizItem[]>([]);
 
   const [definitionQuiz, setDefinitionQuiz] = useState([]);
   const [fillQuiz, setFillQuiz] = useState([]);
@@ -57,7 +65,9 @@ export default function ToeicDay3Quiz() {
     initializeQuiz();
   }, []);
 
-  const handleChange = (key, value) => setAnswers(prev => ({ ...prev, [key]: value }));
+  const handleChange = (key: string, value: string) => {
+    setAnswers(prev => ({ ...prev, [key]: value }));
+  };
 
   const handleSubmit = () => {
     let correct = 0;
@@ -68,7 +78,7 @@ export default function ToeicDay3Quiz() {
     setSubmitted(true);
   };
 
-  const renderQuiz = (title, quizSet, prefix) => (
+  const renderQuiz = (title: string, quizSet: QuizItem[], prefix: string) => (
     <section className="bg-white shadow-md rounded-xl p-6 mb-6">
       <h2 className="text-xl font-semibold text-blue-700 mb-4">{title}</h2>
       {quizSet.map((q, i) => (
