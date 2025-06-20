@@ -9,21 +9,20 @@ function shuffleAndPick<T>(array: T[], count: number): T[] {
 export default function ToeicDay3Quiz() {
   type QuizItem = {
   question: string;
+  translation?: string;
   answer: string;
   options: string[];
   key: string;
 };
 
-const [answers, setAnswers] = useState<{ [key: string]: string }>({});
 const [definitionQuiz, setDefinitionQuiz] = useState<QuizItem[]>([]);
 const [fillQuiz, setFillQuiz] = useState<QuizItem[]>([]);
 const [underlineQuiz, setUnderlineQuiz] = useState<QuizItem[]>([]);
 const [idiomQuiz, setIdiomQuiz] = useState<QuizItem[]>([]);
-
-  const [definitionQuiz, setDefinitionQuiz] = useState([]);
-  const [fillQuiz, setFillQuiz] = useState([]);
-  const [underlineQuiz, setUnderlineQuiz] = useState([]);
-  const [idiomQuiz, setIdiomQuiz] = useState([]);
+const [answers, setAnswers] = useState<{ [key: string]: string }>({});
+const [submitted, setSubmitted] = useState<boolean>(false);
+const [score, setScore] = useState<number>(0);
+const [showAll, setShowAll] = useState<boolean>(false);
 
   const initializeQuiz = () => {
     setAnswers({});
@@ -66,8 +65,8 @@ const [idiomQuiz, setIdiomQuiz] = useState<QuizItem[]>([]);
   }, []);
 
   const handleChange = (key: string, value: string) => {
-    setAnswers(prev => ({ ...prev, [key]: value }));
-  };
+  setAnswers(prev => ({ ...prev, [key]: value }));
+};
 
   const handleSubmit = () => {
     let correct = 0;

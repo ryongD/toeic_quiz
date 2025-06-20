@@ -34,7 +34,11 @@ export const idioms = [
   { answer: "participate in", translation: "~에 참여하다" },
 ];
 
-export function getMarkAfterQuestion(answers, key, correct) {
-  if (!(key in answers)) return "";
+export const getMarkAfterQuestion = (
+  answers: { [key: string]: string },
+  key: string,
+  correct: string
+): string => {
+  if (!answers[key]) return "";
   return answers[key] === correct ? "⭕" : "❌";
-}
+};
