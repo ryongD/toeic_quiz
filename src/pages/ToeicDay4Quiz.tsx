@@ -63,7 +63,12 @@ export default function ToeicDay4Quiz() {
       key: `i_${i}`
     })), 5));
 
-    setGrammarQuiz(shuffleAndPick(grammarQuestionPool, 5));
+    setGrammarQuiz(
+      shuffleAndPick(
+        grammarQuestions.map((q, idx) => ({ ...q, key: `g_${idx}` })),
+        5
+      )
+    );
   };
 
   useEffect(() => {
