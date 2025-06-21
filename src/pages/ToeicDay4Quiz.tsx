@@ -3,21 +3,30 @@ import { shuffle } from "../utils/shuffle";
 import { words, idioms, getMarkAfterQuestion } from "../data/day4Data";
 import { grammarQuestionPool } from "../data/grammarQuestionPool";
 
-function shuffleAndPick(array, count) {
+type Quiz = {
+  question: string;
+  answer: string;
+  options: string[];
+  key: string;
+  explanation?: string;
+  translation?: string;
+};
+
+function shuffleAndPick<T>(array: T[], count: number): T[] {
   return shuffle([...array]).slice(0, count);
 }
 
 export default function ToeicDay4Quiz() {
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [showAll, setShowAll] = useState(false);
 
-  const [definitionQuiz, setDefinitionQuiz] = useState([]);
-  const [fillQuiz, setFillQuiz] = useState([]);
-  const [underlineQuiz, setUnderlineQuiz] = useState([]);
-  const [idiomQuiz, setIdiomQuiz] = useState([]);
-  const [grammarQuiz, setGrammarQuiz] = useState([]);
+  const [definitionQuiz, setDefinitionQuiz] = useState<Quiz[]>([]);
+  const [fillQuiz, setFillQuiz] = useState<Quiz[]>([]);
+  const [underlineQuiz, setUnderlineQuiz] = useState<Quiz[]>([]);
+  const [idiomQuiz, setIdiomQuiz] = useState<Quiz[]>([]);
+  const [grammarQuiz, setGrammarQuiz] = useState<Quiz[]>([]);
 
   const initializeQuiz = () => {
     setAnswers({});
@@ -61,7 +70,9 @@ export default function ToeicDay4Quiz() {
     initializeQuiz();
   }, []);
 
-  const handleChange = (key, value) => setAnswers(prev => ({ ...prev, [key]: value }));
+  const handleChange = (key: string, value: string) => {
+    setAnswers(prev => ({ ...prev, [key]: value }));
+  };
 
   const handleSubmit = () => {
     let correct = 0;
@@ -72,7 +83,12 @@ export default function ToeicDay4Quiz() {
     setSubmitted(true);
   };
 
-  const renderQuiz = (title, quizSet, prefix, showTranslation = false) => (
+  const renderQuiz = (
+    title: string,
+    quizSet: Quiz[],
+    prefix: string,
+    showTranslation: boolean = false
+  ) => (
     <section className="bg-white shadow-md rounded-xl p-6 mb-6">
       <h2 className="text-xl font-semibold text-blue-700 mb-4">{title}</h2>
       {quizSet.map((q, i) => (
