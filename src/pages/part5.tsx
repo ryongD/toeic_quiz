@@ -30,7 +30,7 @@ export default function Part5QuizPage() {
   return (
     <div className="min-h-screen bg-white p-4 flex flex-col items-center justify-center">
       <div className="max-w-xl w-full bg-gray-50 p-6 rounded-xl shadow-md">
-        <h1 className="text-xl font-bold text-gray-800 mb-4">📄 Part 5 문법 퀴즈</h1>
+        <h2 className="text-xl font-bold text-gray-800 mb-4 text-center">📄 Part 5 문법 퀴즈</h2>
 
         <div className="bg-white p-4 rounded-md border border-gray-300 mb-4">
           <p className="text-base sm:text-lg font-semibold text-gray-800 mb-4">
