@@ -684,7 +684,7 @@ The purpose is to ----151---- our goals for the upcoming quarter and discuss new
           "There was a delay due to server maintenance.",
           "All payments are now processed in local currencies."
         ],
-        number: "Feedback from Japanese users has been overwhelmingly positive.",
+        answer: "Feedback from Japanese users has been overwhelmingly positive.",
         explanation: "새로운 버전 추가와 자연스럽게 이어지는 반응 설명입니다.",
         translation: "일본 사용자들로부터의 피드백은 매우 긍정적이었습니다."
       }
