@@ -1498,3 +1498,5 @@ export const grammarQuestionPool = [
     translation: "사용자 경험을 향상시키기 위해 의도된 새로운 소프트웨어 업데이트는 엇갈린 평가를 받았다."
   }
 ];
+
+export default grammarQuestionPool;
