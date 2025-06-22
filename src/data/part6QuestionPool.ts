@@ -829,7 +829,7 @@ The purpose is to ----151---- our goals for the upcoming quarter and discuss new
           "Our product manuals are available online.",
           "Shipping costs are non-refundable."
         ],
-        number: "Visit our website to learn more about the program.",
+        answer: "Visit our website to learn more about the program.",
         explanation: "고객을 위한 안내를 마무리하는 문장으로 적합합니다.",
         translation: "프로그램에 대해 자세히 알아보려면 웹사이트를 방문하세요."
       }
