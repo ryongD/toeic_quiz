@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import part6QuestionPool from "../data/part6QuestionPool";
+import { useNavigate } from "react-router-dom";
+
 
 // 배열 섞기 함수
 function shuffleArray<T>(array: T[]): T[] {
@@ -16,6 +18,7 @@ export default function Part6QuizPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
   const [showExplanation, setShowExplanation] = useState(false);
+  const navigate = useNavigate();
 
   const currentSet = shuffledQuestions[currentIndex];
 
@@ -122,6 +125,14 @@ export default function Part6QuizPage() {
             다음 문제
           </button>
         )}
+      </div>
+      <div className="mb-4 text-center">
+        <button
+          onClick={() => navigate("/")}
+          className="text-sm text-blue-600 underline hover:text-blue-800"
+        >
+          ⬅ 메인으로 돌아가기
+        </button>
       </div>
     </div>
   );
