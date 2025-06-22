@@ -129,7 +129,7 @@ export default function Part6QuizPage() {
       <div className="mb-4 text-center">
         <button
           onClick={() => navigate("/")}
-          className="text-sm text-blue-600 underline hover:text-blue-800"
+          className="text-sm text-blue-600 hover:text-blue-800"
         >
           ⬅ 메인으로 돌아가기
         </button>

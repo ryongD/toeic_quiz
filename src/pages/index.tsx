@@ -13,7 +13,7 @@ export default function Home() {
       </div>
 
       <h1 className="text-3xl font-bold text-center mb-8">📘 TOEIC RC 연습</h1>
-      <h2 className="text-1xl font-bold text-center mb-8">(현재 part5, part6 문제 이용 가능)</h2>
+      <h2 className="text-1xl font-bold text-center mb-8">(현재 part5, part6, part7 문제풀기 가능)</h2>
 
       <div className="grid gap-6 max-w-md mx-auto">
         <Link to="/vocab">

@@ -3,6 +3,7 @@ import Home from "./pages/index";
 import ToeicDay4Quiz from "./pages/ToeicDay4Quiz";
 import Part5QuizPage from "./pages/part5"; // 새로 만든 것
 import Part6QuizPage from "./pages/part6";
+import Part7QuizPage from "./pages/part7";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/toeicday4quiz" element={<ToeicDay4Quiz />} />
         <Route path="/part5" element={<Part5QuizPage />} />
         <Route path="/part6" element={<Part6QuizPage />} />
+        <Route path="/part7" element={<Part7QuizPage />} />
       </Routes>
     </BrowserRouter>
   );
