@@ -4,6 +4,14 @@ import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
+      <div className="mb-6 flex justify-center">
+        <img
+          src="/public/daryong_small.png"
+          alt="귀여운 다룡이"
+          className="w-32 h-auto"
+        />
+      </div>
+
       <h1 className="text-3xl font-bold text-center mb-8">📘 TOEIC RC 연습</h1>
       <h2 className="text-1xl font-bold text-center mb-8">(현재 part5, part6 문제 이용 가능)</h2>
 
