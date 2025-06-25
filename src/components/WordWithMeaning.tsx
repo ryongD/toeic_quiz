@@ -3,9 +3,10 @@ import { dictionary } from "@/data/dictionary";
 
 interface Props {
   text: string;
+  enablePopup?: boolean; // 여기 추가
 }
 
-const WordWithMeaning: React.FC<Props> = ({ text }) => {
+const WordWithMeaning: React.FC<Props> = ({ text, enablePopup = true }) => {
   const [selectedWord, setSelectedWord] = useState<string | null>(null);
   const [tooltipStyle, setTooltipStyle] = useState<React.CSSProperties>({});
   const tooltipRef = useRef<HTMLDivElement>(null);
