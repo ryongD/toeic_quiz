@@ -13,7 +13,9 @@ export default function Home() {
       </div>
 
       <h1 className="text-3xl font-bold text-center mb-8">📘 TOEIC RC 연습</h1>
-      <h2 className="text-1xl font-bold text-center mb-8">(현재 part5, part6, part7 문제풀기 가능)</h2>
+      <h2 className="text-1xl font-bold text-center mb-8">(25.6.26. updates)</h2>
+      <h2 className="text-1xl font-bold text-center mb-8">Part5 지문 터치 시 일부 단어 뜻 제공</h2>
+      <h2 className="text-1xl font-bold text-center mb-8">문제 풀이 시 타이머 추가</h2>
 
       <div className="grid gap-6 max-w-md mx-auto">
         <Link to="/vocab">

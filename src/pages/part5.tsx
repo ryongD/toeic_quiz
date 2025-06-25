@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import grammarQuestionPool from "@/data/grammarQuestionPool";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import WordWithMeaning from "@/components/WordWithMeaning";
 
 export default function Part5QuizPage() {
   const navigate = useNavigate();
@@ -10,12 +11,30 @@ export default function Part5QuizPage() {
   );
   const [selected, setSelected] = useState<string | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [finalTime, setFinalTime] = useState<number | null>(null);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
+    if (!showAnswer) {
+      timer = setInterval(() => {
+        setElapsedTime((prev) => prev + 1);
+      }, 1000);
+    }
+
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [showAnswer]);
+
 
   const handleChoice = (choice: string) => {
     setSelected(choice);
   };
 
   const handleSubmit = () => {
+    setFinalTime(elapsedTime); // 최종 시간 저장
     setShowAnswer(true);
   };
 
@@ -32,10 +51,14 @@ export default function Part5QuizPage() {
       <div className="max-w-xl w-full bg-gray-50 p-6 rounded-xl shadow-md">
         <h2 className="text-xl font-bold text-gray-800 mb-4 text-center">📄 Part 5 문법 퀴즈</h2>
 
+        <div className="text-sm text-gray-600 mb-4 text-right">
+          ⏱️ 경과 시간: <span className="font-semibold text-blue-600">{elapsedTime}초</span>
+        </div>
+
         <div className="bg-white p-4 rounded-md border border-gray-300 mb-4">
-          <p className="text-base sm:text-lg font-semibold text-gray-800 mb-4">
-            {currentQuestion.question}
-          </p>
+        <div className="text-base sm:text-lg font-semibold text-gray-800 mb-4">
+          <WordWithMeaning text={currentQuestion.question} enablePopup={true} />
+        </div>
 
           <div className="space-y-2">
             {currentQuestion.options.map((choice, idx) => {
@@ -67,7 +90,9 @@ export default function Part5QuizPage() {
                   onChange={() => handleChoice(choice)}
                   className="mr-2 accent-blue-500"
                 />
-                <span className="flex-1">{choice}</span>
+                <span className="flex-1">
+                  {choice}
+                </span>
 
                 {showAnswer && isSelected && (
                   <span className="ml-2">
@@ -103,6 +128,12 @@ export default function Part5QuizPage() {
             </>
           )}
         </div>
+
+        {showAnswer && finalTime !== null && (
+          <div className="text-sm text-gray-600 mt-4 text-center">
+            ⏱️ 소요 시간: <span className="font-semibold text-blue-600">{finalTime}초</span>
+          </div>
+        )}
 
         <div className="mt-8 text-center">
           <button

@@ -14,14 +14,29 @@ const Part7QuizPage = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
   const [showExplanation, setShowExplanation] = useState(false);
   const [showTranslation, setShowTranslation] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [finalTime, setFinalTime] = useState<number | null>(null);
 
   const currentSet = shuffledPool[currentIndex];
 
   useEffect(() => {
-    if (currentSet) {
+    let timer: NodeJS.Timeout | null = null;
+
+    if (currentSet && !showExplanation) {
       setSelectedAnswers(Array(currentSet.questions.length).fill(""));
+      setElapsedTime(0);
+
+      timer = setInterval(() => {
+        setElapsedTime((prev) => prev + 1);
+      }, 1000);
     }
-  }, [currentIndex]);
+
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [currentIndex, showExplanation]);
+
+
 
   if (!currentSet) {
     return (
@@ -41,6 +56,7 @@ const Part7QuizPage = () => {
 
   const handleSubmit = () => {
     setShowExplanation(true);
+    setFinalTime(elapsedTime); // 타이머 저장
   };
 
   const handleNext = () => {
@@ -53,6 +69,10 @@ const Part7QuizPage = () => {
   return (
     <div className="max-w-3xl mx-auto p-4">
       <h1 className="text-xl sm:text-2xl font-bold mb-6">📄 Part 7 독해 퀴즈</h1>
+
+      <div className="text-sm text-gray-600 mb-4 text-right">
+        ⏱️ 경과 시간: <span className="font-semibold text-blue-600">{elapsedTime}초</span>
+      </div>
 
       {currentSet.passages.map((passage, index) => (
         <div
@@ -169,6 +189,13 @@ const Part7QuizPage = () => {
           <Button onClick={handleNext}>다음 문제</Button>
         )}
       </div>
+
+      {finalTime !== null && (
+        <div className="text-sm text-gray-600 mt-4 text-center">
+          ⏱️ 소요 시간: <span className="font-semibold text-blue-600">{finalTime}초</span>
+        </div>
+      )}
+
       <div className="mb-4 text-center">
         <button
           onClick={() => navigate("/")}

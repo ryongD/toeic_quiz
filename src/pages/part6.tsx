@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect  } from "react";
 import part6QuestionPool from "../data/part6QuestionPool";
 import { useNavigate } from "react-router-dom";
 
@@ -18,9 +18,28 @@ export default function Part6QuizPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
   const [showExplanation, setShowExplanation] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [finalTime, setFinalTime] = useState<number | null>(null);
+
   const navigate = useNavigate();
 
   const currentSet = shuffledQuestions[currentIndex];
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
+    if (!showExplanation) {
+      timer = setInterval(() => {
+        setElapsedTime((prev) => prev + 1);
+      }, 1000);
+    }
+
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [showExplanation]);
+
+
 
   const handleAnswer = (choice: string, index: number) => {
     const updated = [...selectedAnswers];
@@ -28,7 +47,10 @@ export default function Part6QuizPage() {
     setSelectedAnswers(updated);
   };
 
-  const handleSubmit = () => setShowExplanation(true);
+  const handleSubmit = () => {
+    setShowExplanation(true);
+    setFinalTime(elapsedTime); // 타이머 저장
+  };
 
   const handleNext = () => {
     setSelectedAnswers([]);
@@ -39,6 +61,10 @@ export default function Part6QuizPage() {
   return (
     <div className="max-w-3xl mx-auto p-4 sm:p-6 text-base break-words">
       <h2 className="text-xl font-bold mb-4 text-center">📄 Part 6 문장 완성 퀴즈</h2>
+
+      <div className="text-sm text-gray-600 mb-4 text-right">
+        ⏱️ 경과 시간: <span className="font-semibold text-blue-600">{elapsedTime}초</span>
+      </div>
 
       <div className="bg-gray-50 border border-gray-300 rounded-lg p-4 mb-6 text-sm sm:text-base leading-relaxed text-gray-800 whitespace-pre-wrap break-words">
         {currentSet.passage}
@@ -126,6 +152,13 @@ export default function Part6QuizPage() {
           </button>
         )}
       </div>
+
+      {finalTime !== null && (
+        <div className="text-sm text-gray-600 mt-4 text-center">
+          ⏱️ 소요 시간: <span className="font-semibold text-blue-600">{finalTime}초</span>
+        </div>
+      )}
+
       <div className="mb-4 text-center">
         <button
           onClick={() => navigate("/")}
