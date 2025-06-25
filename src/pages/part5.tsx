@@ -44,6 +44,7 @@ export default function Part5QuizPage() {
     );
     setSelected(null);
     setShowAnswer(false);
+    setElapsedTime(0); // ⬅️ 타이머 초기화
   };
 
   return (
